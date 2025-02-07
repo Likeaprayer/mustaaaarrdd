@@ -1,15 +1,30 @@
 import { Request, Response, NextFunction } from 'express';
 import { BaseError } from '../../utils/errors';
 
-export const errorHandlingMiddleware = async (error: BaseError, req: Request, res: Response, next: NextFunction) => {
-    let parsed_error = error;
-  
+export const errorHandlingMiddleware =  (error: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log("I ran")
+    if (error instanceof BaseError) {
+      res.status(error.status)
+        .send({
+          status: 'error',
+          data: {
+            message: error.message,
+            code: error.status,
+            stack:
+          process.env.NODE_ENV === 'development'
+            ? error.stack
+            : {},
+          },
+        });
+        return
+    }
+
     res.status(500)
-    .json({
+    .send({
       status: 'error',
       data: {
-        message: parsed_error.message || 'Something went wrong',
-        code: error?.status || 500,
+        message: error.message || 'Something went wrong',
+        code: 500,
         stack:
           process.env.NODE_ENV === 'development'
             ? error.stack

@@ -1,8 +1,10 @@
 import express from "express";
+import "express-async-errors";
 import dotenv from "dotenv";
 import routes from "./router";
 import { Authorize } from "./common/middleware/auth.middleware";
 import { errorHandlingMiddleware } from "./common/middleware/error.middleware";
+
 
 //TODO: add cors
 

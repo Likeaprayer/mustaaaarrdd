@@ -15,6 +15,7 @@ export const getUserById = async(req: Request, res: Response): Promise<any> => {
 };
 
 export const getAllUsers = async(req: Request, res: Response): Promise<any> => {
+    throw new Error("Not implemented")
     const users = await User.query().where('is_deleted', false)
   return res.status(200).json({ message: "get all users", data: users})
 };

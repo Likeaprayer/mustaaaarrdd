@@ -1,5 +1,6 @@
 import Joi from '@hapi/joi';
 import { Request, Response, NextFunction } from 'express';
+import { BaseError } from '../../utils/errors';
 
 export interface RequestEntity {
     body?: any;
@@ -35,6 +36,6 @@ export const validationMiddleware = (validationObj:RequestEntity) => (req: Reque
 
    next();
   } catch (err:any) {
-     throw new Error(err.message);
+     throw new BaseError(err.message, 'Bad Request', 400);
   }
 };
