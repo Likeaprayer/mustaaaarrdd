@@ -20,6 +20,8 @@ COPY package*.json .
 
 COPY --from=builder /app/dist ./dist
 
+RUN npm run migrate-up
+
 RUN npm ci --only=production
 
 CMD ["node", "dist/index.js"]

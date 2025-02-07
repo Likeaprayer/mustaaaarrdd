@@ -4,7 +4,7 @@ A robust REST API built with Node.js, TypeScript, and PostgreSQL that provides u
 
 ## Live Demo
 - API Base URL: `https://mustaaaarrdd.onrender.com`
-- API Documentation: `https://likeaprayer/mustaaaarrdd/README.md`
+- API Documentation: `https://glikeaprayer/mustaaaarrdd/README.md`
 
 ## Tech Stack
 - **Backend**: Node.js + TypeScript + Express

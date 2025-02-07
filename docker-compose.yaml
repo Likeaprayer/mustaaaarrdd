@@ -1,4 +1,13 @@
 services:
+  postgres:
+    image: postgres:15
+    env_file:
+      - ./.env # Use the same .env file for both services
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
   node-api:
     build:
       context: . #. means this docker-compose is inside the node api home directory, in this scenario, you can even abandon this option.
@@ -8,18 +17,14 @@ services:
     depends_on:
       - postgres
     env_file:
-      - .env # Use the same .env file for both services
-    working_dir: /usr/src/app
+      - ./.env # Use the same .env file for both services
+    working_dir: /app/
+    environment:
+      - NODE_ENV=development
     volumes:
-      - ~/Documents/lprayer-projects/mustaaaarrdd:/usr/src/app
+      - .:/app/
+      - /app/node_modules
     command: npm run dev
-
-  postgres:
-    image: postgres:15
-    env_file:
-      - .env # Use the same .env file for both services
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
 
 volumes:
   postgres-data:
