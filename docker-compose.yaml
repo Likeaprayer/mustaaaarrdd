@@ -11,7 +11,7 @@ services:
       - .env # Use the same .env file for both services
     working_dir: /usr/src/app
     volumes:
-      - /Documents/lprayer-projects/mustaaaarrdd:/usr/src/app
+      - ~/Documents/lprayer-projects/mustaaaarrdd:/usr/src/app
     command: npm run dev
 
   postgres:
