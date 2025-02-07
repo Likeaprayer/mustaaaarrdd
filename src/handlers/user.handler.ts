@@ -5,7 +5,10 @@ import { encryptPassword } from "../utils/password";
 export const getUserById = async(req: Request, res: Response): Promise<any> => {
     const id = req.params.id
     const user = await User.query().findById(id)
-    if(!user || !user.is_deleted) {
+    console.log(user)
+    console.log(!user?.is_deleted)
+    
+    if(!user || user.is_deleted) {
         return res.status(404).json({ message: "user not found"})
     }
   res.json({ message: "success", data: user });

@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
         //Users
         table.uuid('id').primary().notNullable();
         table.string('full_name');
-        table.string('email').notNullable().unique();
+        table.string('email').notNullable().unique().index();
         table.string('password').notNullable();
         table.string('role').notNullable();
         table.boolean('is_email_verified').notNullable().defaultTo(false);
@@ -19,5 +19,6 @@ export async function up(knex: Knex): Promise<void> {
 
 
 export async function down(knex: Knex): Promise<void> {
+    return await knex.schema.dropTableIfExists('users')
 }
 

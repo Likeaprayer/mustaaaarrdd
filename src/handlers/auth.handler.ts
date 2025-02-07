@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User from "../db/models/user"
 import { decryptPassword, encryptPassword } from "../utils/password";
+import { createToken } from "../utils/token";
 
 export const signup = async(req: Request, res: Response):Promise<any> => {
     const signupReq = req.body
@@ -30,7 +31,7 @@ export const login = async(req: Request, res: Response): Promise<any> => {
       return res.status(401).json({ message: "Invalid email or password" });  
     }
 
-    //TODO: generate jwt
+    const token = createToken(user)
 
-  return res.json({ message: "login",  data: user}); 
+  return res.json({ message: "login",  data: user, token}); 
 }
