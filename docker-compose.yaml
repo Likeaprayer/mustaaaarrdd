@@ -1,0 +1,25 @@
+services:
+  node-api:
+    build:
+      context: . #. means this docker-compose is inside the node api home directory, in this scenario, you can even abandon this option.
+      dockerfile: Dockerfile
+    ports:
+      - "7321:7321"
+    depends_on:
+      - postgres
+    env_file:
+      - .env # Use the same .env file for both services
+    working_dir: /usr/src/app
+    volumes:
+      - /Documents/lprayer-projects/mustaaaarrdd:/usr/src/app
+    command: npm run dev
+
+  postgres:
+    image: postgres:15
+    env_file:
+      - .env # Use the same .env file for both services
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
